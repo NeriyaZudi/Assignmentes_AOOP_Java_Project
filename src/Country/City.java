@@ -13,33 +13,30 @@ import java.util.List;
 
 public class City extends Settlement {
 
-    public City(String name, Location location, List<Person> population, RamzorColor ramzorColor)
+
+    public City(String name, Location location, List<Person> population,int capacity)
     {
-        super(name,location,population,ramzorColor);
+        super(name,location,population,capacity);
     }
 
-    @Override
-    public RamzorColor calculateRamzorGrade() {
-        double p = contagiousPercent();//Calculate contagious percentage
-        double new_c=0.2*(Math.pow(4,1.25*p));//Calculate a new ramzor grade
-        this.setRamzorGrade(new_c);//Update a new ramzor grade
-        //Returns a new ramzor color
-        if(new_c <= 0.4)
-            return RamzorColor.Green;
-        else if(new_c <= 0.6)
-            return RamzorColor.Yellow;
-        else if(new_c <= 0.8)
-            return RamzorColor.Orange;
-        else
-            return RamzorColor.Red;
-    }
+
 
     @Override
     public String toString() {
-        return "## City Settlement ## " + super.toString();
+        return "## City  ## \n" + super.toString();
+    }
+    public RamzorColor calculateRamzorGrade()
+    {
+        this.P =contagiousPercent();
+        this.C = calculateVirusColorRateByType();
+        this.ramzorColor=RamzorColor.CalculateColor(C);
+        return this.ramzorColor;
+
     }
 
-    /*public boolean setRamzorGrade(double newGrade) {
-        return super.setRamzorGrade(newGrade);
-    }*/
+    protected double calculateVirusColorRateByType() {
+        return 0.2*(Math.pow(4,1.25*P));
+    }
+    private double P;
+    private double C;
 }

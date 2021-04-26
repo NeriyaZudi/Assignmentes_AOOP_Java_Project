@@ -11,30 +11,27 @@ import java.util.List;
 
 public class Moshav extends Settlement{
 
-    public Moshav(String name, Location location, List<Person> population, RamzorColor ramzorColor)
+    public Moshav(String name, Location location, List<Person> population,int capacity)
     {
-        super(name,location,population,ramzorColor);
+        super(name,location,population,capacity);
     }
 
     @Override
-    public RamzorColor calculateRamzorGrade() {
-        double c = getRamzorGrade();//Calculate contagious percentage
-        double p = contagiousPercent();//Calculate a new ramzor grade
-        double new_c=0.3+3*(Math.pow((Math.pow(1.2,c)*(p-0.35)),5));
-        this.setRamzorGrade(new_c);
-        //Returns a new ramzor color
-        if(new_c <= 0.4)
-            return RamzorColor.Green;
-        else if(new_c <= 0.6)
-            return RamzorColor.Yellow;
-        else if(new_c <= 0.8)
-            return RamzorColor.Orange;
-        else
-            return RamzorColor.Red;
+    public RamzorColor calculateRamzorGrade()
+    {
+        this.P =contagiousPercent();
+        this.C = calculateVirusColorRateByType();
+        this.ramzorColor=RamzorColor.CalculateColor(C);
+        return this.ramzorColor;
     }
 
     @Override
     public String toString() {
-        return "## Moshav Settlement ## " + super.toString();
+        return "## Moshav  ## \n" + super.toString();
     }
+    protected double calculateVirusColorRateByType() {
+        return 0.3+ 3*(Math.pow((Math.pow(1.2,C)*(P-0.35)),5));
+    }
+    private double P;
+    private double C;
 }
