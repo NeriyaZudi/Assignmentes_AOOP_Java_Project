@@ -16,13 +16,4 @@ public class Clock {
     }
 
     private static long current;
-    private static int tick_per_day =1;
-
-    public static int calculatePassedTime(long starttime)
-    {
-        return Math.round((int)((starttime-now())/tick_per_day));//method which calculate the passed time.
-    }
-
-
-
 }

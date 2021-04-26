@@ -27,14 +27,14 @@ public class Main {
             SimulationFile s = new SimulationFile(file);//Read data from the file
             Map map = s.getMap();//Create a map
             printMap(map);//Print a map before initialization
-            /*map.InitContagion();//Infecting 1 percent of the population
+            map.InitContagion();//Infecting 1 percent of the population
             printMap(map);////Print a map after initialization
             //Running simulations
             for (int i = 0; i < simulationsNumber; i++) {
                 System.out.println("~~~~~~~~~~~~~ Simulation " + (i + 1) + " ~~~~~~~~~~~~~");
                 map.SimulateMap();
                 printMap(map);//Print an updated map
-            }*/
+            }
             printNumberOfSicks(map);//Print multiple patients per settlement
             System.exit(0);
 

@@ -67,7 +67,7 @@ public class Map {
                 contagionIdex++;
             }
             //Update a new ramzor color for each settlement after contagion
-            settlement[i].calculateRamzorGrade();
+            settlement[i].setRamzorColor(settlement[i].calculateRamzorGrade());
         }
     }
 

@@ -16,18 +16,15 @@ import java.util.List;
 
 public abstract class Settlement {
 
-    public Settlement(String name,Location location,List <Person> population, int capacity)
+    public Settlement(String name,Location location,List <Person> population,RamzorColor ramzorColor)
     {
         this.name=new String(name);
         this.location=new Location(location);
         this.population=population;
+        this.ramzorColor=ramzorColor;
+        this.ramzorGrade=0;
         this.sicks=new ArrayList<>();
         this.healthy=new ArrayList<>();
-        this.capacity=capacity;
-        this.connectedSettlements=new ArrayList<Settlement>();
-        this.ramzorColor=RamzorColor.Green;
-
-
     }
     public Settlement(Settlement other)
     {
@@ -35,7 +32,7 @@ public abstract class Settlement {
         this.location=new Location(other.getLocation());
         this.population=other.population;
         this.ramzorColor=other.getRamzorColor();
-
+        this.ramzorGrade=other.getRamzorGrade();
 
     }
 
@@ -44,7 +41,7 @@ public abstract class Settlement {
     public String toString() {
 
         // Printing ramzor color
-       /* RamzorColor color=getRamzorColor();
+        RamzorColor color=getRamzorColor();
         String r_color = switch (color) {
             case Green -> Colors.GREEN + "Ramzor Color= " + color+Colors.RESET ;
             case Yellow -> Colors.YELLOW + "Ramzor Color= " + color+Colors.RESET ;
@@ -53,12 +50,7 @@ public abstract class Settlement {
         };
         return Colors.BLUE_BOLD+"Name : "+getName()+Colors.RESET+"\nThe location on Map is : " + getLocation().toString()
                 +"\npopulation: "+getPopulation().size()+ " ~~~~~ "+r_color
-                +" ~~~~~ Number of sicks: "+calcSick();*/
-        return "Name of settlement: "+getName()+" connected: "+printconnected();
-
-
-
-
+                +" ~~~~~ Number of sicks: "+calcSick();//+" ramzor garde = "+getRamzorGrade();
 
     }
 
@@ -83,21 +75,8 @@ public abstract class Settlement {
         this.population.add(p);
         return true;
     }
-    public boolean transferPerson(Person p, Settlement s)
-    {
-        //Multiply probabilities for transition between localities
-        double passCheck =p.getSettlement().getRamzorColor().getPassProbability()*s.getRamzorColor().getPassProbability();
-        Random r=new Random();
-        //The settlement reached its quota
-        if (getPopulation().size()==getCapacity())
-            return false;
-        //The settlement reached its quota
-        if(passCheck > r.getRandomNumber())
-            return false;
-
-        //If the probability of transition was successful
+    public boolean transferPerson(Person p, Settlement s){
         return true;
-
     }
 
     //getters
@@ -117,24 +96,29 @@ public abstract class Settlement {
     {
         return this.ramzorColor;
     }
-    public int getCapacity(){return this.capacity;}
-    public List<Settlement> getConnectedSettlements(){
-        return this.connectedSettlements;
+    public double getRamzorGrade() {
+        return ramzorGrade;
     }
-
 
     //setters
-    public void setPopulation(List<Person> population) {
-        this.population = population; }
-    public void setVaccinationDoses(int doses){this.vaccinationDoses =doses;}
-    public void setConnectedSettlements(Settlement s)
+    public boolean setPopulation(List<Person> other)
     {
-        if(s!=null)
-        this.connectedSettlements.add(s);
+        if(other==null)
+            return false;
+        this.population=other;
+        return true;
+    }
+    public boolean setRamzorColor(RamzorColor newColor)
+    {
+        this.ramzorColor=newColor;
+        return true;
+    }
+    public boolean setRamzorGrade(double newGrade) {
+        this.ramzorGrade=newGrade;
+        return true;
+
     }
 
-
-    protected abstract double calculateVirusColorRateByType();
     //Method for calculating the number of sicks
     public int calcSick()
     {
@@ -201,28 +185,18 @@ public abstract class Settlement {
             }
         }
         //Update a new ramzor color for each settlement after contagion
-        calculateRamzorGrade();
+        setRamzorColor(calculateRamzorGrade());
     }
-
-    public String printconnected()
-    {
-        String connected="";
-        for(int i=0;i<getConnectedSettlements().size();i++)
-            if(getConnectedSettlements().size()!=0)
-                connected+=getConnectedSettlements().get(i).getName()+ " , ";
-    return connected;
-    }
-
 
     //Data members
     private String name;
     private final Location location;
     private List<Person> population;
-    protected RamzorColor ramzorColor;
+    private RamzorColor ramzorColor;
+    private double ramzorGrade;
     private List<Healthy> healthy;
     private List<Sick> sicks;
-    private int capacity;
-    private final double maxPeople = 1.3;
-    protected int vaccinationDoses =0;
-    private List<Settlement> connectedSettlements;
+
+
+
 }

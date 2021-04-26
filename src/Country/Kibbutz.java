@@ -10,29 +10,30 @@ import Population.Person;
 import java.util.List;
 
 public class Kibbutz extends Settlement{
-    public Kibbutz(String name, Location location, List<Person> population,int capacity)
+    public Kibbutz(String name, Location location, List<Person> population, RamzorColor ramzorColor)
     {
-        super(name,location,population,capacity);
-
+        super(name,location,population,ramzorColor);
     }
 
     @Override
-    public RamzorColor calculateRamzorGrade()
-    {
-        this.P =contagiousPercent();
-        this.C = calculateVirusColorRateByType();
-        this.ramzorColor=RamzorColor.CalculateColor(C);
-        return this.ramzorColor;
+    public RamzorColor calculateRamzorGrade() {
+        double c = getRamzorGrade();//Specify current ramzor grade
+        double p = contagiousPercent();//Calculate contagious percentage
+        double new_c=0.45+(Math.pow((Math.pow(1.5,c)*(p-0.4)),3));//Calculate a new ramzor grade
+        this.setRamzorGrade(new_c);////Update a new ramzor grade
+        //Returns a new ramzor color
+        if(new_c <= 0.4)
+            return RamzorColor.Green;
+        else if(new_c <= 0.6)
+            return RamzorColor.Yellow;
+        else if(new_c <= 0.8)
+            return RamzorColor.Orange;
+        else
+            return RamzorColor.Red;
     }
 
-    protected double calculateVirusColorRateByType() {
-        return 0.45+(Math.pow(Math.pow(1.5,C)*(P-0.4),3));
-    }
     @Override
     public String toString() {
-        return "## Kibbutz ## \n" + super.toString();
+        return "## Kibbutz Settlement ## " + super.toString();
     }
-
-    private double P;
-    private double C;
 }
