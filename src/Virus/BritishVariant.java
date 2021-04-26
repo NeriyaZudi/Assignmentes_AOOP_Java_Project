@@ -20,6 +20,9 @@ public class BritishVariant implements IVirus{
     @Override
     public boolean tryToContagion(Person p1, Person p2) {
 
+        int days=Clock.calculatePassedTime(((Sick) p1).getContagiousTime());
+        if( days< 5)
+            return false;
         double probability=0;//Probability of infection
         Random r =new Random();
         if (p2 instanceof Sick)//Unable to infect a sick person

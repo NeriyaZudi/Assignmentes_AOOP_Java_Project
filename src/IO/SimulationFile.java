@@ -94,33 +94,12 @@ public class SimulationFile  {
 
         }
         //Loading connections
-        int connectLength=strings.size();
-        int indexOf=0;
-        while(indexOf<array.length) {//Running on the entire set of settlements
-            for (i = 0; i < connectLength; i++) {//Running on the name sets of connected settlements
-                //Creating objects according to the names of the settlements
-                Settlement one = connect(strings.get(i), array);
-                Settlement two = connect(connector.get(i), array);
-                //Check whether the settlement in the index exists in the array of connections
-                if (array[indexOf].getName().equals(one.getName())) {
-                    //Adding the second settlement to the array of connections of the first settlement
-                    array[indexOf].getConnectedSettlements().add(two);
-                }
-                if (array[indexOf].getName().equals(two.getName())) {
-                    //Adding the first settlement to the array of connections of the second settlement
-                    array[indexOf].getConnectedSettlements().add(one);
-                }
-            }
-            indexOf++;
-
-        }
+        array=loadConnection(strings,connector,array);
 
         this.map=new Map(array,settlementCounter);
         this.length=settlementCounter;
 
     }
-
-
 
     //getters
     public Map getMap() {
@@ -156,7 +135,30 @@ public class SimulationFile  {
         }
         return null;//If there is no settlement by that name
     }
-
+    //Mathod for loading connections between settlements
+    public Settlement[] loadConnection(List<String> strings,List<String> connector,Settlement[] array ) {
+        Settlement[] updateArray = array;
+        int connectLength = strings.size();
+        int index = 0;
+        while (index < updateArray.length) {//Running on the entire set of settlements
+            for (int i = 0; i < connectLength; i++) {//Running on the name sets of connected settlements
+                //Creating objects according to the names of the settlements
+                Settlement one = connect(strings.get(i), updateArray);
+                Settlement two = connect(connector.get(i), updateArray);
+                //Check whether the settlement in the index exists in the array of connections
+                if (updateArray[index].getName().equals(one.getName())) {
+                    //Adding the second settlement to the array of connections of the first settlement
+                    updateArray[index].getConnectedSettlements().add(two);
+                }
+                if (updateArray[index].getName().equals(two.getName())) {
+                    //Adding the first settlement to the array of connections of the second settlement
+                    updateArray[index].getConnectedSettlements().add(one);
+                }
+            }
+            index++;
+        }
+        return updateArray;
+    }
     //Data members
         private Map map;
         private int length;

@@ -26,8 +26,8 @@ public class ChineseVariant implements IVirus {
     public boolean tryToContagion(Person p1, Person p2)
     {
 
-        Sick person= new Sick((Sick)p1);
-        if(person.getContagiousTime() < 5)
+        int days=Clock.calculatePassedTime(((Sick) p1).getContagiousTime());
+        if( days< 5)
             return false;
         double probability=0;//Probability of infection
         Random r =new Random();
