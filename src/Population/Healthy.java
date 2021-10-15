@@ -10,13 +10,18 @@ import Location.Point;
 import Simulation.Clock;
 import Virus.IVirus;
 
-public class Healthy extends Person{
+public class Healthy extends Person {
 
-    public Healthy(int age, Point location, Settlement settlement)
-    {
-        super(age,location,settlement);
+    private  final double probability = 1.0;
+
+
+    public Healthy(int age, Point location, Settlement settlement) {
+        super(age, location, settlement);
     }
 
+    public double getProbability() {
+        return probability;
+    }
 
     @Override
     public double contagionProbability() {
@@ -27,9 +32,8 @@ public class Healthy extends Person{
     public Person contagion(IVirus v) {
         int age = getAge();
         Point location = new Point(getLocation());
-        Settlement settlement=getSettlement();
-        long contagiousTime=1;
-        Sick s= new Sick(age,location,settlement,contagiousTime,v);
+        Settlement settlement = getSettlement();
+        Sick s = new Sick(age, location, settlement, Clock.now(), v);
         return s;
     }
 
@@ -38,18 +42,13 @@ public class Healthy extends Person{
         return "Healthy" + super.toString();
     }
 
-    public Person vaccinate(){
+    public Person vaccinate() {
 
         int age = getAge();
         Point location = new Point(getLocation());
-        Settlement settlement=getSettlement();
+        Settlement settlement = getSettlement();
         long time = Clock.now();
-        Vaccinated v=new Vaccinated(age,location,settlement,time);
+        Vaccinated v = new Vaccinated(age, location, settlement, time);
         return v;
     }
-    public static double getProbability() {
-        return probability;
-    }
-
-    private static final double probability=1.0;
 }

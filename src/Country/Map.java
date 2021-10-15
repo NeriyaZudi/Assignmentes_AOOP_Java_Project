@@ -6,84 +6,170 @@
 package Country;
 
 
-import Population.*;
-import Simulation.Clock;
-import Virus.*;
+import IO.LogFile;
+import UI.LineDecorator;
 
-public class Map {
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-    public Map(Settlement settlement[] , int length) {
+public class Map implements Iterable<Settlement>{
 
-        this.settlement = settlement;
-        this.length = length;
+    //Data members
+    private ArrayList<Settlement> settlement;
+    private final int length;//Number of settlements on the map
+    private ArrayList<LineDecorator> decorators=new ArrayList();
+    private AtomicBoolean isInAction = new AtomicBoolean();//boolean variable to check if the simulation is in operation
+    private AtomicBoolean isStopped = new AtomicBoolean();//boolean variable to check if the simulation is in stop
+    private AtomicBoolean isMapLoaded = new AtomicBoolean();//boolean variable to check if has a map been loaded
+    private CyclicBarrier cyclicBarrier;
+    private  static LogFile logFileWriter=null;
+
+
+    public Map(){
+        settlement=new ArrayList<>();
+        length=0;
+        this.isInAction.set(false);
+        this.isMapLoaded.set(false);
     }
 
+    public Map(ArrayList <Settlement> sett, int len) {
 
-    public Settlement[] getSettlement() {
+        settlement=sett;
+        length = len;
+        this.isInAction.set(false);
+        this.isMapLoaded.set(false);
+    }
+
+    //************** getters **************
+
+    public ArrayList<Settlement>  getSettlement() {
         return settlement;
     }
+
     public int getLength() {
         return length;
     }
 
+    public Boolean getIsInAction(){
+        return isInAction.get();
+    }
+
+    public Boolean getIsStopped(){
+        return isStopped.get();
+    }
+
+    public Boolean getIsMapLoaded(){
+        return isMapLoaded.get();
+    }
+
+    public CyclicBarrier getCyclicBarrier(){return cyclicBarrier;}
+
+    public static LogFile getLogFileWriter() {
+        return logFileWriter;
+    }
+
+    public ArrayList<LineDecorator> getDecorators() {
+        return decorators;
+    }
+
+    //************** setters **************
+
+    public void setSettlement(Settlement[] s) {
+        settlement = new ArrayList<>();
+        Collections.addAll(settlement, s);
+    }
+
+    public void setIsInAction(Boolean tf){
+        isInAction.set(tf);
+    }
+
+    public void setIsStopped(Boolean tf) {
+        isStopped.set(tf);
+    }
+
+    public void setIsMapLoaded(Boolean tf) {
+        isMapLoaded.set(tf);
+    }
+
+    public void setCyclicBarrier(CyclicBarrier cyclicBarrier) {
+        this.cyclicBarrier = cyclicBarrier;
+    }
+
+    public static void setLogFile(LogFile log) {
+        logFileWriter=log;
+    }
+
     //Initialization - Pasting a percentage of the population in each settlement
-    public void InitContagion()
-    {
-        final double precent = 0.01;
-        int contagionIdex=0,population,randomVirus;
-        IVirus variant;
-        Random r=new Random();
+    public void InitContagion() {
+        for (int i = 0; i < length; i++)
+            settlement.get(i).InitContagion();
+    }
 
-        for(int i=0;i<getLength();i++) {//Running on all the settlements on the map
-            population = settlement[i].getPopulation().size();//Population size of each settlement
-            contagionIdex=0;
+    public Settlement at(int rowIndex) {
+        return settlement.get(rowIndex);
+    }
 
-            while (contagionIdex < (population * precent)) {//Running up to the size of a percentage of the population
-                //Select a random number for selecting a variant type to paste
-                randomVirus = r.getRandomInRange(3, 1);
-                switch (randomVirus) {
-                    case 1 -> {//ChineseVariant
-                        variant = new ChineseVariant();
-                        //Returns a copy of a person's data while becoming sick
-                        Person changeSick = this.settlement[i].getPopulation().get(contagionIdex).contagion(variant);
-                        //Changing a healthy person to sick in the population array
-                        this.settlement[i].getPopulation().set(contagionIdex, changeSick);
-                    }
-                    case 2 -> {//BritishVariant
-                        variant = new BritishVariant();
-                        //Returns a copy of a person's data while becoming sick
-                        Person changeSick = this.settlement[i].getPopulation().get(contagionIdex).contagion(variant);
-                        //Changing a healthy person to sick in the population array
-                        this.settlement[i].getPopulation().set(contagionIdex, changeSick);
-                    }
-                    default -> {//SouthAfricanVariant
-                        variant = new SouthAfricanVariant();
-                        //Returns a copy of a person's data while becoming sick
-                        Person changeSick = this.settlement[i].getPopulation().get(contagionIdex).contagion(variant);
-                        //Changing a healthy person to sick in the population array
-                        this.settlement[i].getPopulation().set(contagionIdex, changeSick);
-                    }
-                }
-                contagionIdex++;
-            }
-            //Update a new ramzor color for each settlement after contagion
-            settlement[i].setRamzorColor(settlement[i].calculateRamzorGrade());
+    //print map
+    public void printMap() {
+        for (int i = 0; i < length; i++)
+            System.out.println(settlement.get(i).toString() + "\n");
+    }
+
+    //Creation and execution of threads
+    public void executeThreads(){
+
+        //Create threads by the amount of settlements on the map
+        Thread[] settlementThreads = new Thread[getLength()];
+        for (int i = 0; i < settlementThreads.length; i++) {
+            settlementThreads[i] = new Thread(getSettlement().get(i));
+        }
+
+        for (Thread settlementThread : settlementThreads) {
+            settlementThread.start();
+        }
+
+    }
+
+    //Map update for all settlements And updating sicks
+    public void setupMap(){
+        for (Settlement s : settlement) {
+            s.setMap(this);
+            //Update 1 percent of the population is blue
+            for (int i = 0; i < 10; i++)
+                    s.InitContagion();
         }
     }
 
-    public void SimulateMap()
-    {
-        //Map simulation
-        for (int i=0;i<length;i++)
-            settlement[i].simulateSettlement();
-
-
-        Clock.nextTick();//Promoting a clock tick
+    //Creating decorators for all the connections between settlements
+    public void setupDecorators(){
+        int counter;
+        for (Settlement s:settlement){
+            counter=0;
+            while (counter<s.getConnectedSettlements().size()) {
+                Settlement t = s.getConnectedSettlements().get(counter);
+                if(!isExistDecorator(s,t))//If there is a decorator for the specific connection
+                    decorators.add(new LineDecorator(s,t));
+                counter++;
+            }
+        }
     }
 
-    //Data members
-    private final Settlement[] settlement;
-    private int length;//Number of settlements on the map
+    //Check if there is a decorator for the connection to avoid duplications
+    public boolean isExistDecorator(Settlement o,Settlement t){
+        for(LineDecorator d:decorators){
+            if(d.getSource().getName().equals(t.getName()) && d.getTarget().getName().equals(o.getName()))
+                return true;
+        }
+        return false;
+    }
 
-
+    @Override
+    public Iterator<Settlement> iterator() {
+       return settlement.iterator();
+    }
 }

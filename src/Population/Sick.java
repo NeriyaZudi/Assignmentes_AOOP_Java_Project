@@ -7,22 +7,26 @@ package Population;
 
 import Country.Settlement;
 import Location.Point;
-import Virus.*;
+import Simulation.Clock;
+import Virus.IVirus;
 
 public class Sick extends Person {
 
+    //Data members
+    private long contagiousTime;
+    private IVirus virus;
+
     //ctors
-    public Sick(int age, Point location, Settlement settlement,long contagiousTime,IVirus virus)
-    {
-        super(age,location,settlement);
-        this.contagiousTime=contagiousTime;
-        this.virus=virus;
+    public Sick(int age, Point location, Settlement settlement, long contagiousTime, IVirus virus) {
+        super(age, location, settlement);
+        this.contagiousTime = Clock.now();
+        this.virus = virus;
     }
-    public Sick(Sick other)
-    {
+
+    public Sick(Sick other) {
         super(other.getAge(), other.getLocation(), other.getSettlement());
-        this.contagiousTime=other.getContagiousTime();
-        this.virus= other.getVirus();
+        this.contagiousTime = other.getContagiousTime();
+        this.virus = other.getVirus();
 
     }
 
@@ -41,34 +45,29 @@ public class Sick extends Person {
         return "Sick{" +
                 "contagiousTime=" + contagiousTime +
                 ", virus=" + virus.toString() +
-                '}'+super.toString();
+                '}' + super.toString();
     }
 
     //getters
     public long getContagiousTime() {
         return contagiousTime;
     }
+
     public IVirus getVirus() {
         return virus;
     }
 
-    public Person recover()
-    {
+    public Person recover() {
         int age = getAge();
         Point location = new Point(getLocation());
-        Settlement settlement=getSettlement();
-        IVirus virus= getVirus();
-        Convalescent convalescent=new Convalescent(age,location,settlement,virus);
+        Settlement settlement = getSettlement();
+        IVirus virus = getVirus();
+        Convalescent convalescent = new Convalescent(age, location, settlement, virus);
         return convalescent;
     }
+
     public boolean tryToDie() {
-
         return virus.tryToKill(this);
-
     }
-
-    //Data members
-    private long contagiousTime;
-    private IVirus virus;
 
 }

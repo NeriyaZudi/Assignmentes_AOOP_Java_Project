@@ -10,12 +10,18 @@ import Location.Point;
 import Simulation.Clock;
 import Virus.IVirus;
 
-public class Convalescent extends Person{
+public class Convalescent extends Person {
 
-    public Convalescent(int age, Point location, Settlement settlement,IVirus virus)
-    {
-        super(age,location,settlement);
-        this.virus=virus;
+    private final double probability = 0.2;
+    private IVirus virus;
+
+    public Convalescent(int age, Point location, Settlement settlement, IVirus virus) {
+        super(age, location, settlement);
+        this.virus = virus;
+    }
+
+    public  double getProbability() {
+        return probability;
     }
 
     @Override
@@ -29,9 +35,9 @@ public class Convalescent extends Person{
 
         int age = getAge();
         Point location = new Point(getLocation());
-        Settlement settlement=getSettlement();
-        long contagiousTime= Clock.now();
-        Sick s= new Sick(age,location,settlement,contagiousTime,v);
+        Settlement settlement = getSettlement();
+        long contagiousTime = Clock.now();
+        Sick s = new Sick(age, location, settlement, contagiousTime, v);
         return s;
     }
 
@@ -39,18 +45,11 @@ public class Convalescent extends Person{
     public String toString() {
         return "Convalescent{" +
                 "virus=" + getVirus() +
-                '}'+super.toString();
+                '}' + super.toString();
     }
 
     //getters
     public IVirus getVirus() {
         return virus;
     }
-    public static double getProbability() {
-        return probability;
-    }
-
-
-    private IVirus virus;
-    private static final double probability=0.2;
 }

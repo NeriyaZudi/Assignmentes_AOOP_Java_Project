@@ -6,23 +6,29 @@
 package Location;
 
 public class Location {
+    //Data members
+    private final Point position;
+    private final Size size;
+
     //ctros
-    public Location(){
-        this.position=new Point();
-        this.size=new Size();
+    public Location() {
+        this.position = new Point();
+        this.size = new Size();
     }
-    public Location(Point position,Size size) {
-        this.position=position;
-        this.size=size;
+
+    public Location(Point position, Size size) {
+        this.position = position;
+        this.size = size;
     }
-    public Location(Location other)
-    {
-        this.position=other.getPosition();
-        this.size=other.getSize();
+
+    public Location(Location other) {
+        this.position = other.getPosition();
+        this.size = other.getSize();
     }
+
     //equals
     public boolean equals(Location other) {
-        return (position==other.position)&&(size==other.size);
+        return (position == other.position) && (size == other.size);
     }
 
     @Override
@@ -33,10 +39,11 @@ public class Location {
     }
 
     //getters
-    public Point getPosition() {return this.position;}
-    public Size getSize() {return this.size;}
+    public Point getPosition() {
+        return this.position;
+    }
 
-    //Data members
-    private final Point position;
-    private final Size size;
+    public Size getSize() {
+        return this.size;
+    }
 }

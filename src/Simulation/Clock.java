@@ -7,13 +7,24 @@ package Simulation;
 
 public class Clock {
 
-    public static long now(){
+    private static long current;
+    private static int tick_per_day = 1;
+
+    public static long now() {
         return current;
     }
-    public static void nextTick(){
-        current++;
 
+    public static void nextTick() {
+        current+=tick_per_day;
     }
 
-    private static long current;
+    public static int calculatePassedTime(long startTime) {
+        return Math.round((int) ((startTime - now()) / tick_per_day));//method which calculate the passed time.
+    }
+
+    public static void setTick_per_day(int value) {
+        tick_per_day = value;
+    }
+
+
 }

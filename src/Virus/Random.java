@@ -6,19 +6,20 @@
 package Virus;
 
 public class Random {
-    public Random()
-    {
-        this.RandomNumber=Math.random();;
+    private double RandomNumber;
+
+    public Random() {
+        this.RandomNumber = Math.random();
+        ;
     }
-    public  double getRandomNumber()
-    {
-        this.RandomNumber=Math.random();
+
+    public double getRandomNumber() {
+        this.RandomNumber = Math.random();
         return this.RandomNumber;
     }
-    public int getRandomInRange(int max,int min)
-    {
-        RandomNumber = (Math.random()*(max-min+1)+min);
-        return  (int)RandomNumber;
+
+    public int getRandomInRange(int max, int min) {
+        RandomNumber = (Math.random() * (max - min + 1) + min);
+        return (int) RandomNumber;
     }
-    private double RandomNumber;
 }

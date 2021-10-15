@@ -1,0 +1,15 @@
+City; Ashdod; 20;20; 150; 190; 20000
+#;Ashdod;Beer-Sheva
+#;Ashdod;Sderot
+City; Beer-Sheva; 210;20; 30; 120; 40000
+#;Yavne;Yinon
+Moshav; Yinon; 20;230; 30; 30; 300
+City; Yavne; 100;300; 30; 150; 30000
+#;Yavne;Sderot
+#;Givat-Brener;Bnei-Reem
+City; Sderot; 280;180; 95; 130; 28000
+Kibbutz; Givat-Brener; 430;70; 100; 50; 1200
+Moshav; Bnei-Reem; 400;180; 40; 80; 750
+#;Tel-aviv;Herzliya
+City; Tel-aviv; 480;260; 200; 250; 60000
+City; Herzliya; 220;360; 170; 220; 30000

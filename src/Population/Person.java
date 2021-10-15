@@ -5,27 +5,34 @@
 */
 package Population;
 
-import Country.*;
-import Location.*;
-import Virus.*;
+import Country.Settlement;
+import Location.Point;
+import Virus.IVirus;
 
 import java.util.Objects;
 
 public abstract class Person {
 
-    //abstract methods
-    public abstract double contagionProbability();
-    public abstract Person contagion(IVirus v);
+    //Data members
+    private int age;
+    private Point location;
+    private Settlement settlement;
 
     //ctors
-    public Person(int age,Point location,Settlement settlement)
-    {
-        this.age=age;
-        this.location=new Point(location);
-        this.settlement=settlement;
+    public Person(int age, Point location, Settlement settlement) {
+        this.age = age;
+        this.location = new Point(location);
+        this.settlement = settlement;
 
     }
-    public Person() { }
+
+    public Person() {
+    }
+
+    //abstract methods
+    public abstract double contagionProbability();
+
+    public abstract Person contagion(IVirus v);
 
     @Override
     public String toString() {
@@ -53,26 +60,23 @@ public abstract class Person {
     public int getAge() {
         return age;
     }
+
     public Point getLocation() {
         return location;
-    }
-    public double getDistance(Point point)
-    {
-        return Math.sqrt(Math.pow((getLocation().getX()-point.getX()),2)+(Math.pow((getLocation().getY()-point.getY()),2)));
     }
 
     //setters
     public void setLocation(Point location) {
         this.location = location;
     }
+
+    public double getDistance(Point point) {
+        return Math.sqrt(Math.pow((getLocation().getX() - point.getX()), 2) + (Math.pow((getLocation().getY() - point.getY()), 2)));
+    }
+
     public Settlement getSettlement() {
         return settlement;
     }
-
-    //Data members
-    private int age;
-    private Point location;
-    private Settlement settlement;
 
 
 }
