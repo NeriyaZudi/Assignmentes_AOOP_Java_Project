@@ -9,7 +9,7 @@
    
 <h3> About us </h3>
   <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/about.png" align="center"
-     alt="about" width="300" height="200">
+     alt="about" width="400" height="250">
      
   <h3> About the project </h3>
    <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/Java_programming_language_logo.svg.png" align="right"
