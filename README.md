@@ -19,5 +19,16 @@
      The project simulates the spread of the corona virus
      Adhesions, recoveries, statistics, ramzor colors for settlements, development of variants and more...
      The project is java based and GUI implementation so running can be easily controlled
+
+ <img src="https://upload.wikimedia.org/wikipedia/he/4/44/SCE_logo.png" align="right"
+     alt="SCE logo" width="320" height="98">
+  <hr>
     
+   In this project we demonstrate our knowledge in:
+   * **Java programming principles**
+   * **Advanced Object Oriented Programming**
+   * **GUI Graphical user interface**
+   * **Multithreading Programming**
+   * **Design patterns in java**
+   * **Reading and writing files**
     
