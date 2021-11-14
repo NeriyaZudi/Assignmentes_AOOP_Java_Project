@@ -9,7 +9,7 @@
    
 <h3> About us </h3>
   <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/about.png" align="center"
-     alt="about" width="600" height="400">
+     alt="about" width="300" height="200">
      
   <h3> About the project </h3>
    <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/Java_programming_language_logo.svg.png" align="right"
@@ -31,4 +31,17 @@
    * **Multithreading Programming**
    * **Design patterns in java**
    * **Reading and writing files**
+
+<h3> Some Pictures... </h3>
+ <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/main%20window.png" align="center"
+     alt="main win" width="400" height="200">
+ <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/start.png" align="center"
+     alt="start" width="400" height="200">
+ <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/run.png" align="center"
+     alt="run" width="400" height="200">
+<img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/stats.png" align="center"
+     alt="stats" width="400" height="200">
+<img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/edit%20mut.png" align="center"
+     alt="edit" width="400" height="200">
+ 
     
