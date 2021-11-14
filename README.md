@@ -10,5 +10,14 @@
 <h3> About us </h3>
   <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/about.png" align="center"
      alt="about" width="600" height="400">
+     
+  <h3> About the project </h3>
+   <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/Java_programming_language_logo.svg.png" align="right"
+     alt="JAVA logo" width="320" height="98">
 
-Course-Project Assignments in Java
+     Course-Project Assignments in Java
+     The project simulates the spread of the corona virus
+     Adhesions, recoveries, statistics, ramzor colors for settlements, development of variants and more...
+     The project is java based and GUI implementation so running can be easily controlled
+    
+    
