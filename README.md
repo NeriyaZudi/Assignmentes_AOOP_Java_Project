@@ -13,7 +13,7 @@
      
   <h3> About the project </h3>
    <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/Java_programming_language_logo.svg.png" align="right"
-     alt="JAVA logo" width="320" height="98">
+     alt="JAVA logo" width="200" height="98">
 
      Course-Project Assignments in Java
      The project simulates the spread of the corona virus
