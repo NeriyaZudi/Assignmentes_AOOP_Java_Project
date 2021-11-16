@@ -9,7 +9,7 @@
    
 <h3> About us </h3>
   <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/about.png" align="center"
-     alt="about" width="400" height="250">
+     alt="about" width="50%" height="300">
      
   <h3> About the project </h3>
    <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/Java_programming_language_logo.svg.png" align="right"
@@ -46,12 +46,23 @@
   <h3> Simulation in action </h3>
        Running simulation includes: adhesions, transition between settlements, recovery and death.<br>
        The simulation speed can be controlled in the lower spinner.<br>
-       The map is updated in real time<br>  <br> 
- <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/run.png" align="center"
-     alt="run" width="400" height="400">
-<img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/stats.png" align="center"
-     alt="stats" width="400" height="200">
-<img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/edit%20mut.png" align="center"
-     alt="edit" width="400" height="200">
+       The map is updated in real time<br>  <br>
+       <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/run.png" align="center"
+     alt="run" width="400" height="400"><br>
+  <h3> Statistics window </h3>
+      The statistics window displays data for each settlement on the map. <br>
+      The table can be exported to a log file (opened using excel software).<br>
+      Sicks people can be added using the "Add sick" button. <br>
+      Vaccine doses can be sent for a specific settlement using the "Vaccinate" button. <br>
+      The data in the table is updated in real time.<br>  <br> 
+      <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/stats.png" align="center"
+      alt="stats" width="400" height="400"><br>
+      <h3>  Mutation Editing window </h3>
+      In the Mutation Edit window you can select variants of the virus. <br>  <br>  
+      <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/edit%20mut.png" align="center"
+      alt="edit" width="400" height="400">
+
+
+
  
     
