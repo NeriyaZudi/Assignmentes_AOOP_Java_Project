@@ -32,9 +32,9 @@
    * **Design patterns in java**
    * **Reading and writing files**
 
-<h4> Some Pictures... </h4>
+# Some Pictures...
 <h3> Main Window </h3>
-        In the main window you can perform a number of actions such as: Map loading, simulation start, 
+        In the main window you can perform a number of actions such as:<br> Map loading, simulation start, 
         simulation speed control and switching to other windows in the application.  
  <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/main%20window.png" align="center"
      alt="main win" width="400" height="200">
