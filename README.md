@@ -36,7 +36,7 @@
 <h3> Main Window </h3>
         In the main window you can perform a number of actions such as:<br> Map loading, simulation start, 
         simulation speed control and switching to other windows in the application.<br>  
- <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/main%20window.png" display ="block" margin-left="auto" margin-right="auto"         alt="main win">
+ <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/main%20window.png" display ="block" margin-left="auto" margin-right="auto"         width="400" alt="main win">
  <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/start.png" align="center"
      alt="start" width="400" height="200">
  <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/run.png" align="center"
