@@ -37,7 +37,10 @@
         In the main window you can perform a number of actions such as:<br> Map loading, simulation start, 
         simulation speed control and switching to other windows in the application.<br>  <br> 
  <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/main%20window.png" align="center" 
-      alt="main win"  width="400" height="400">
+      alt="main win"  width="400" height="400"><br>  <br>
+  <h3> Map View </h3>
+       The settlements can be seen by locations as well as each settlement is represented by its ramzor color <br>
+       and settlements that are connected to each other<br>  <br> 
  <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/start.png" align="center"
      alt="start" width="400" height="200">
  <img src="https://github.com/NeriyaZudi/COVID-19-Virus-Simulation/blob/master/pictures/run.png" align="center"
